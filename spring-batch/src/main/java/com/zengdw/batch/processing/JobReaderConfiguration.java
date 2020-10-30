@@ -1,5 +1,6 @@
 package com.zengdw.batch.processing;
 
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
 import org.springframework.batch.item.database.Order;
@@ -27,9 +28,11 @@ public class JobReaderConfiguration {
     private DataSource dataSource;
 
     /**
+     * StepScope: 告诉容器直到Step执行的阶段才初始化这个@Bean
      * 通过游标读取数据
      */
     @Bean
+    @StepScope
     public JdbcCursorItemReader<Person> jdbcCursorItemReader(){
         JdbcCursorItemReader<Person> reader = new JdbcCursorItemReader<>();
         reader.setDataSource(dataSource);

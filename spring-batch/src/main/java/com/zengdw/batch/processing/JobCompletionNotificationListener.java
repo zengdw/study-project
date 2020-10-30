@@ -3,7 +3,7 @@ package com.zengdw.batch.processing;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.listener.JobExecutionListenerSupport;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +15,14 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Component
-public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
+public class JobCompletionNotificationListener implements JobExecutionListener {
     @Resource
     private JdbcTemplate jdbcTemplate;
+
+    @Override
+    public void beforeJob(JobExecution jobExecution) {
+
+    }
 
     @Override
     public void afterJob(JobExecution jobExecution) {
@@ -32,4 +37,5 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
             ).forEach(person -> log.info("Found <" + person + "> in the database."));
         }
     }
+
 }
