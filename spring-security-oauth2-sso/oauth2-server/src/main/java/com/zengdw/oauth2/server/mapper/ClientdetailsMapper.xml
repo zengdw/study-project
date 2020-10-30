@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zengdw.oauth2.server.mapper.ClientdetailsMapper">
+  <resultMap id="BaseResultMap" type="com.zengdw.oauth2.server.entity.Clientdetails">
+    <!--@mbg.generated-->
+    <!--@Table clientdetails-->
+    <id column="appId" property="appid" />
+    <result column="resourceIds" property="resourceids" />
+    <result column="appSecret" property="appsecret" />
+    <result column="scope" property="scope" />
+    <result column="grantTypes" property="granttypes" />
+    <result column="redirectUrl" property="redirecturl" />
+    <result column="authorities" property="authorities" />
+    <result column="access_token_validity" property="accessTokenValidity" />
+    <result column="refresh_token_validity" property="refreshTokenValidity" />
+    <result column="additionalInformation" property="additionalinformation" />
+    <result column="autoApproveScopes" property="autoapprovescopes" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    appId, resourceIds, appSecret, `scope`, grantTypes, redirectUrl, authorities, access_token_validity, 
+    refresh_token_validity, additionalInformation, autoApproveScopes
+  </sql>
+</mapper>

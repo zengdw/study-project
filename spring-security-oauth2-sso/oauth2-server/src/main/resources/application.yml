@@ -1,0 +1,15 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/oauth2-sso?characterEncoding=utf8&useSSL=false&useUnicode=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
