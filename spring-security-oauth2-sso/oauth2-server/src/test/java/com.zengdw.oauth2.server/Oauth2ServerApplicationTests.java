@@ -18,6 +18,6 @@ public class Oauth2ServerApplicationTests {
 
     @Test
     public void test1(){
-        System.out.println(passwordEncoder.encode("123456"));
+        System.out.println(passwordEncoder.encode("secret1"));
     }
 }
