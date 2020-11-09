@@ -3,7 +3,6 @@ package com.zengdw.oauth2.server.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -28,8 +27,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Resource
     private AuthenticationManager authenticationManager;
     @Resource
-    private UserDetailsService userDetailsService;
-    @Resource
     private DataSource dataSource;
 
     /**
@@ -42,15 +39,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
-        security.checkTokenAccess("isAuthenticated()")
-                .tokenKeyAccess("isAuthenticated()")
+        security.checkTokenAccess("permitAll()")
+                .tokenKeyAccess("permitAll()")
                 .allowFormAuthenticationForClients();
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.authenticationManager(authenticationManager)
-                //.userDetailsService(userDetailsService)
                 //token储存位置
                 .tokenStore(new JdbcTokenStore(dataSource))
                 //使用刷新token
