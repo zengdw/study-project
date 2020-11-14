@@ -19,7 +19,3 @@ logging:
     org:
       springframework:
         security: debug
-
-spring:
-  main:
-    allow-bean-definition-overriding: true
