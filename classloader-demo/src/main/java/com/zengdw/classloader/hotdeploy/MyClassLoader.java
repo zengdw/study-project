@@ -11,7 +11,11 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MyClassLoader extends ClassLoader {
     private final String classPath;
-    private final Map<String, Class<?>> classMap = new ConcurrentHashMap<>();
+    private final static Map<String, Class<?>> classMap;
+
+    static {
+        classMap = new ConcurrentHashMap<>();
+    }
 
     public MyClassLoader(String classPath) {
         super(ClassLoader.getSystemClassLoader());
@@ -24,7 +28,7 @@ public class MyClassLoader extends ClassLoader {
         if(null == bytes) {
             return null;
         }
-        final Class<?> aClass = defineClass(name, bytes, 0, bytes.length);
+        final Class<?> aClass = defineClass(null, bytes, 0, bytes.length);
         classMap.put(name, aClass);
         return aClass;
     }
@@ -47,8 +51,9 @@ public class MyClassLoader extends ClassLoader {
     }
 
     private boolean checkName(String name) {
-        if ((name == null) || (name.length() == 0))
+        if ((name == null) || (name.length() == 0)) {
             return true;
+        }
         return (name.indexOf('/') == -1) && (name.charAt(0) != '[');
     }
 }

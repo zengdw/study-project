@@ -11,8 +11,12 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class HotDeployManager {
     private final MyClassLoader myClassLoader;
-    private final Map<String, Long> hotDeplyClasses = new ConcurrentHashMap<>();
     private final String hotDeployClasspath;
+    private final static Map<String, Long> HOT_DEPLY_CLASSES;
+
+    static {
+        HOT_DEPLY_CLASSES = new ConcurrentHashMap<>();
+    }
 
     public HotDeployManager(String hotDeployClasspath) {
         this.myClassLoader = new MyClassLoader(hotDeployClasspath);
@@ -50,13 +54,13 @@ public class HotDeployManager {
         final File loadFile = new File(filePath);
         //  文件最后修改时间
         final long lastModified = loadFile.lastModified();
-        final Long modified = hotDeplyClasses.get(className);
+        final Long modified = HOT_DEPLY_CLASSES.get(className);
         if (modified != null && lastModified == modified) {
             return;
         }
         myClassLoader.loadClass(className);
         // 加载完成把修改时间缓存
-        hotDeplyClasses.put(className, lastModified);
+        HOT_DEPLY_CLASSES.put(className, lastModified);
     }
 
     public MyClassLoader getMyClassLoader() {
