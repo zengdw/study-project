@@ -8,14 +8,15 @@ package com.zengdw.classloader.hotdeploy;
 public class HotDeployTest {
     public static void main(String[] args) {
         new Thread(() -> {
-            final String path = HotDeployTest.class.getResource("/").getPath();
-            final HotDeployManager deployManager = new HotDeployManager(path+"com");
+            final String path = "C:\\Users\\zengd\\Desktop\\hotTest\\";
             while (true) {
                 try {
+                    final HotDeployManager deployManager = new HotDeployManager(path);
                     deployManager.loadClass(null);
                     Thread.sleep(1000);
 
-                    new HotDeployClass().test();
+                    final Class<?> aClass = deployManager.getMyClassLoader().findLoadClass("P");
+                    aClass.getMethod("test").invoke(aClass.newInstance());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
