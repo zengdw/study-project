@@ -15,7 +15,7 @@ public class HotDeployTest {
                     deployManager.loadClass(null);
                     Thread.sleep(1000);
 
-                    final Class<?> aClass = deployManager.getMyClassLoader().findLoadClass("P");
+                    final Class<?> aClass = deployManager.getMyClassLoader().findLoadClass("p1.P");
                     aClass.getMethod("test").invoke(aClass.newInstance());
                 } catch (Exception e) {
                     e.printStackTrace();

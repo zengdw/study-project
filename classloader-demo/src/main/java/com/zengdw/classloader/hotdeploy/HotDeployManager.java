@@ -40,14 +40,14 @@ public class HotDeployManager {
                 final String packagePath = path.substring(hotDeployClasspath.length()).replaceAll("\\\\", ".");
                 final String fileName = f.getName();
                 String className = packagePath + "." + fileName.substring(0, fileName.indexOf("."));
-                className = className.replace("^\\.", "");
-                doLoadClass(fileName, className);
+                className = className.replaceAll("^(\\.+)", "");
+                doLoadClass(f.getAbsolutePath(), className);
             }
         }
     }
 
-    private void doLoadClass(String fileName, String className) throws ClassNotFoundException {
-        final File loadFile = new File(hotDeployClasspath, fileName);
+    private void doLoadClass(String filePath, String className) throws ClassNotFoundException {
+        final File loadFile = new File(filePath);
         //  文件最后修改时间
         final long lastModified = loadFile.lastModified();
         final Long modified = hotDeplyClasses.get(className);
