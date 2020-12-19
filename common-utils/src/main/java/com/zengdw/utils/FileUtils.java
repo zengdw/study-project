@@ -1,9 +1,8 @@
 package com.zengdw.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.*;
 import java.nio.channels.FileChannel;
 
 /**
@@ -81,5 +80,34 @@ public class FileUtils {
         }
         //删除
         folder.delete();
+    }
+
+    /**
+     * @param contents 二进制数据
+     * @param filePath 文件存放目录，包括文件名及其后缀，如D:\file\bike.jpg
+     * @description: 把二进制数据转成指定后缀名的文件，例如PDF，PNG等
+     */
+    public static void byteToFile(byte[] contents, String filePath) throws Exception {
+        if(StringUtils.isBlank(filePath)){
+            throw new Exception("文件存放目录为空");
+        }
+        File file = new File(filePath);
+        // 获取文件的父路径字符串
+        File path = file.getParentFile();
+        if (!path.exists()) {
+            path.mkdirs();
+        }
+        try (ByteArrayInputStream byteInputStream = new ByteArrayInputStream(contents);
+             BufferedInputStream bis = new BufferedInputStream(byteInputStream);
+             FileOutputStream fos = new FileOutputStream(file);
+             // 实例化OutputString 对象
+             BufferedOutputStream output = new BufferedOutputStream(fos)
+        ) {
+            byte[] buffer = new byte[1024];
+            int l;
+            while ((l = bis.read(buffer)) != -1) {
+                output.write(buffer, 0, l);
+            }
+        }
     }
 }
