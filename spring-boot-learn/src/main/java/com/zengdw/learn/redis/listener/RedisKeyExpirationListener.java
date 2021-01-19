@@ -1,4 +1,4 @@
-package com.zengdw.redis.listener;
+package com.zengdw.learn.redis.listener;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.data.redis.connection.Message;

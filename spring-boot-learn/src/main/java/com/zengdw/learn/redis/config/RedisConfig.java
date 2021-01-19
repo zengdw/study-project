@@ -1,4 +1,4 @@
-package com.zengdw.redis.config;
+package com.zengdw.learn.redis.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
