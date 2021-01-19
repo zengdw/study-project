@@ -56,47 +56,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.authenticationManager(authenticationManager)
                 //token储存位置
                 .tokenStore(new JdbcTokenStore(dataSource))
-                .accessTokenConverter(new CustomAccessTokenConverter())
                 //使用刷新token
                 .reuseRefreshTokens(true)
-                //授权码模式 code存放在内存中
+                //授权码模式 code存放在数据库中
                 .authorizationCodeServices(new JdbcAuthorizationCodeServices(dataSource));
-    }
-
-    static class CustomAccessTokenConverter extends DefaultAccessTokenConverter {
-
-        @Override
-        public Map<String, ?> convertAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
-            Map<String, Object> response = new HashMap();
-            OAuth2Request clientToken = authentication.getOAuth2Request();
-            response.put("authorities", AuthorityUtils.authorityListToSet(clientToken.getAuthorities()));
-
-            if (token.getScope() != null) {
-                String scopeAttribute = "scope";
-                response.put(scopeAttribute, token.getScope());
-            }
-
-            if (token.getAdditionalInformation().containsKey("jti")) {
-                response.put("jti", token.getAdditionalInformation().get("jti"));
-            }
-
-            if (token.getExpiration() != null) {
-                response.put("exp", token.getExpiration().getTime() / 1000L);
-            }
-
-            if (authentication.getOAuth2Request().getGrantType() != null) {
-                response.put("grant_type", authentication.getOAuth2Request().getGrantType());
-            }
-
-            response.putAll(token.getAdditionalInformation());
-            String clientIdAttribute = "client_id";
-            response.put(clientIdAttribute, clientToken.getClientId());
-            if (clientToken.getResourceIds() != null && !clientToken.getResourceIds().isEmpty()) {
-                response.put("aud", clientToken.getResourceIds());
-            }
-
-            return response;
-        }
     }
 
     @Bean
