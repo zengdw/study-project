@@ -3,6 +3,7 @@ package com.zengdw.learn.event;
 import com.zengdw.learn.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,8 +20,11 @@ public class UserEventRegisterListener {
         log.info(user.toString());
     }
 
+    @Async
     @EventListener
-    public void handleEvent1(String obj){
+    public void handleEvent1(String obj) throws Exception {
+        log.info(Thread.currentThread().getName());
         log.info(obj);
+        throw new Exception("exception");
     }
 }
