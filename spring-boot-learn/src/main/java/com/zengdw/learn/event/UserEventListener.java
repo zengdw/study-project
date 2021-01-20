@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class UserEventRegisterListener {
+public class UserEventListener {
     @EventListener
     public void handleEvent(User user){
         log.info(user.toString());

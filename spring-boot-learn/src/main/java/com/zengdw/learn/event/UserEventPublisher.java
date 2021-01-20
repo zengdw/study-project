@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * @version: 1.0
  */
 @Service
-public class UserEventRegister {
+public class UserEventPublisher {
     @Resource
     private ApplicationEventPublisher publisher;
 

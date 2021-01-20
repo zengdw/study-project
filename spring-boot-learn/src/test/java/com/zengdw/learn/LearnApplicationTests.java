@@ -1,16 +1,16 @@
 package com.zengdw.learn;
 
-import com.zengdw.learn.event.UserEventRegister;
+import com.zengdw.learn.event.UserEventPublisher;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 
 @SpringBootTest
-class RedisDemoApplicationTests {
+class LearnApplicationTests {
 
     @Resource
-    UserEventRegister register;
+    UserEventPublisher register;
 
     @Test
     void contextLoads() {
