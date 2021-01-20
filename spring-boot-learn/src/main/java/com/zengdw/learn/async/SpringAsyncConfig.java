@@ -1,13 +1,15 @@
 package com.zengdw.learn.async;
 
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
 
 /**
  * @author : zengd
@@ -39,5 +41,21 @@ public class SpringAsyncConfig implements AsyncConfigurer {
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return new CustomAsyncExceptionHandler();
+    }
+
+    /**
+     * 带返回值的异步方法
+     */
+    @Async
+    public Future<String> asyncMethodWithReturnType() {
+        System.out.println("Execute method asynchronously - "
+                + Thread.currentThread().getName());
+        try {
+            Thread.sleep(5000);
+            return new AsyncResult<String>("hello world !!!!");
+        } catch (InterruptedException e) {
+            //
+        }
+        return null;
     }
 }
