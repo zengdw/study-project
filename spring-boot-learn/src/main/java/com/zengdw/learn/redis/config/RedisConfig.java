@@ -24,6 +24,9 @@ public class RedisConfig {
         return container;
     }
 
+    /**
+     * 配置redis的key value的序列化方式
+     */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory){
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
