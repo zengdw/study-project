@@ -52,7 +52,7 @@ public class SpringAsyncConfig implements AsyncConfigurer {
                 + Thread.currentThread().getName());
         try {
             Thread.sleep(5000);
-            return new AsyncResult<String>("hello world !!!!");
+            return new AsyncResult<>("hello world !!!!");
         } catch (InterruptedException e) {
             //
         }
