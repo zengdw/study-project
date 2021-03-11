@@ -1,0 +1,12 @@
+spring:
+  rabbitmq:
+#    host: k8s.zengdw.com
+#    port: 5672
+#    username: guest
+#    password: guest
+    addresses: amqp://guest:guest@k8s.zengdw.com
+    virtual-host: /
+    template:
+      retry:
+        enabled: true
+        initial-interval: "2s"
