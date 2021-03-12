@@ -36,7 +36,7 @@
         <!-- 将src/main/resources下配置文件打包到config目录 -->
         <fileSet>
             <directory>src/main/resources</directory>
-            <outputDirectory>/config</outputDirectory>
+            <outputDirectory>config</outputDirectory>
             <includes>
                 <include>**/*.xml</include>
                 <include>**/*.properties</include>
@@ -51,6 +51,7 @@
             <outputDirectory>lib</outputDirectory>
             <includes>
                 <include>*.jar</include>
+                <include>lib/*.jar</include>
             </includes>
         </fileSet>
         <!-- 将项目说明文档打包到docs目录中 -->
