@@ -42,7 +42,8 @@
                             <!-- 是否要把第三方jar加入到类构建路径 -->
                             <addClasspath>true</addClasspath>
                             <!-- 外部依赖jar包的最终位置 -->
-                            <classpathPrefix>lib/</classpathPrefix>
+                            <!-- 因为我们将第三方jar和本项目jar放在同一个目录下，这里就使用./ -->
+                            <classpathPrefix>./</classpathPrefix>
                             <!-- 项目启动类 -->
                             <mainClass>com.zengdw.assembly.AssemblyApplication</mainClass>
                         </manifest>
@@ -50,7 +51,7 @@
                 </configuration>
             </plugin>
             <!--拷贝依赖到jar外面的lib目录-->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
@@ -68,7 +69,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
