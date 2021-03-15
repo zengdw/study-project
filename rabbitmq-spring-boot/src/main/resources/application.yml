@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: rabbitmq-spring-boot
+  rabbitmq:
+    host: k8s.zengdw.com
+    listener:
+      simple:
+        # 手动ACK
+        acknowledge-mode: manual
+    # 消息发送到交换机确认机制 是否需要回调 未发送到queue中时会产生回调
+    publisher-returns: true
+    publisher-confirm-type: simple
