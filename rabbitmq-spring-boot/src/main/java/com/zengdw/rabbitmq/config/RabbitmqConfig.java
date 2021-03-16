@@ -118,7 +118,7 @@ public class RabbitmqConfig {
     }
 
     /**
-     * 自定义交换器
+     * 自定义交换器 延迟交换器 rabbitmq_delayed_message_exchange插件
      */
     @Bean
     public CustomExchange customExchange() {
