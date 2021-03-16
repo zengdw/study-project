@@ -5,10 +5,13 @@ spring:
     name: rabbitmq-spring-boot
   rabbitmq:
     host: k8s.zengdw.com
+    # ä½¿ç”¨amqpsåè®®ï¼Œåˆ™ä¼šè‡ªåŠ¨å¯ç”¨SSLæ”¯æŒ
+    # addresses: amqp://guest:guest@k8s.zengdw.com
     listener:
       simple:
-        # ÊÖ¶¯ACK
+        # æ‰‹åŠ¨ACK
         acknowledge-mode: manual
-    # ÏûÏ¢·¢ËÍµ½½»»»»úÈ·ÈÏ»úÖÆ ÊÇ·ñĞèÒª»Øµ÷ Î´·¢ËÍµ½queueÖĞÊ±»á²úÉú»Øµ÷
+      type: direct
+    # æ¶ˆæ¯å‘é€åˆ°äº¤æ¢æœºç¡®è®¤æœºåˆ¶ æ˜¯å¦éœ€è¦å›è°ƒ æœªå‘é€åˆ°queueä¸­æ—¶ä¼šäº§ç”Ÿå›è°ƒ
     publisher-returns: true
     publisher-confirm-type: correlated
