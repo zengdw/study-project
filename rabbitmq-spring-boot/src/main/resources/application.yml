@@ -7,8 +7,8 @@ spring:
     host: k8s.zengdw.com
     listener:
       simple:
-        # æ‰‹åŠ¨ACK
+        # ÊÖ¶¯ACK
         acknowledge-mode: manual
-    # æ¶ˆæ¯å‘é€åˆ°äº¤æ¢æœºç¡®è®¤æœºåˆ¶ æ˜¯å¦éœ€è¦å›è°ƒ æœªå‘é€åˆ°queueä¸­æ—¶ä¼šäº§ç”Ÿå›è°ƒ
+    # ÏûÏ¢·¢ËÍµ½½»»»»úÈ·ÈÏ»úÖÆ ÊÇ·ñĞèÒª»Øµ÷ Î´·¢ËÍµ½queueÖĞÊ±»á²úÉú»Øµ÷
     publisher-returns: true
-    publisher-confirm-type: simple
+    publisher-confirm-type: correlated

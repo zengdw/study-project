@@ -2,14 +2,12 @@ package com.zengdw.rabbitmq.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitOperations;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.autoconfigure.amqp.RabbitTemplateConfigurer;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,13 +20,24 @@ import java.util.Map;
 @Configuration
 public class RabbitmqConfig {
     @Bean
-    @ConditionalOnSingleCandidate(ConnectionFactory.class)
-    @ConditionalOnMissingBean({RabbitOperations.class})
     public RabbitTemplate rabbitTemplate(RabbitTemplateConfigurer configurer, ConnectionFactory connectionFactory) {
         RabbitTemplate template = new RabbitTemplate();
         configurer.configure(template, connectionFactory);
+        // 消息为投递到queue时回调
         template.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
-            System.out.println("消息发送失败" + message + replyCode + replyText + exchange + routingKey);
+            System.out.println("消息发送失败");
+            System.out.println("msg:" + new String(message.getBody(), StandardCharsets.UTF_8));
+            System.out.println("properties:" + message.getMessageProperties().toString());
+            System.out.println("replyCode:" + replyCode);
+            System.out.println("replyText:" + replyText);
+            System.out.println("exchange:" + exchange);
+            System.out.println("routingKey:" + routingKey);
+        });
+        // 消息未投递到exchange时回调
+        template.setConfirmCallback((var1, var2, var3) -> {
+            System.out.println(var1 != null ? var1.toString() : "");
+            System.out.println(var2);
+            System.out.println(var3);
         });
         return template;
     }

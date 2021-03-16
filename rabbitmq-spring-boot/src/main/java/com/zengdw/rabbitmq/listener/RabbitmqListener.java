@@ -18,11 +18,11 @@ public class RabbitmqListener {
     /**
      * channel.basicRecover(true|false): 消息返回队列，true：表示消息可能会投递给其他消费者，false：表示消息重新投递给自己
      * channel.basicNack(tag, false, true): 表示拒绝tag标识的消息
-     * 第二个参数：false表示只拒绝当前消息 true表示会拒绝之前未ack的所有消息
-     * 第三个参数：false表示拒绝的消息不会回到队列 true表示拒绝的消息重新加入队列
+     *      第二个参数：false表示只拒绝当前消息 true表示会拒绝之前未ack的所有消息
+     *      第三个参数：false表示拒绝的消息不会回到队列 true表示拒绝的消息重新加入队列
      * channel.basicReject(tag, true): 表示拒绝tag标识的消息
-     * 第二个参数：false表示拒绝的消息不会回到队列 true表示拒绝的消息重新加入队列
-     * 与basicNack的区别就是basicNack可以一次nack多条消息
+     *      第二个参数：false表示拒绝的消息不会回到队列 true表示拒绝的消息重新加入队列
+     *      与basicNack的区别就是basicNack可以一次nack多条消息
      */
 
     @RabbitListener(queues = "queue2")
@@ -47,7 +47,6 @@ public class RabbitmqListener {
     public void process2(String msg, Channel channel, Message message) throws IOException {
         System.out.println("queue1:" + msg);
         try {
-            float i = 1 / 0;
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         } catch (Exception e) {
             e.printStackTrace();
