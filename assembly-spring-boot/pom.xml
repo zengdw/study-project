@@ -72,13 +72,8 @@
             </plugin>-->
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <!-- 具体的配置文件位置 -->
-                        <descriptor>src/main/assembly/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
                 <executions>
                     <execution>
                         <id>make-assebly</id>
@@ -88,6 +83,19 @@
                         <goals>
                             <goal>single</goal>
                         </goals>
+                        <configuration>
+                            <!-- 指定最后tar或者zip包的名字 -->
+                            <finalName>${project.name}-${project.version}</finalName>
+                            <!-- tar或者zip包的输出目录 -->
+                            <!-- ./ 是指当前项目的根目录 -->
+                            <outputDirectory>./target</outputDirectory>
+                            <!-- 打包后的包名是否包含assembly的id名 -->
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <!-- 具体的配置文件位置 -->
+                                <descriptor>src/main/assembly/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

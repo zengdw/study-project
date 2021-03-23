@@ -1,8 +1,9 @@
 <assembly>
     <!--
         必须写，否则打包时会有 assembly ID must be present and non-empty 错误
-        这个名字最终会追加到打包的名字的末尾，如项目的名字为 hangge-test-0.0.1-SNAPSHOT,
-        则最终生成的包名为 hangge-test-0.0.1-SNAPSHOT-bin.tar.gz
+        如果pom.xml assembly插件配置的appendAssemblyId=true这个名字最终会追加到打包的名字的末尾，
+        如项目的名字为 hangge-test-0.0.1-SNAPSHOT,
+        则最终生成的包名为 hangge-test-0.0.1-SNAPSHOT-bin.zip
      -->
     <id>bin</id>
     <!-- 打包的类型，如果有N个，将会打N个类型的包 -->
@@ -10,7 +11,8 @@
         <!--<format>tar.gz</format>-->
         <format>zip</format>
     </formats>
-    <includeBaseDirectory>true</includeBaseDirectory>
+    <!-- 禁止在归档文件中创建根目录的分发目录 -->
+    <includeBaseDirectory>false</includeBaseDirectory>
 
     <!--第三方依赖设置-->
     <dependencySets>
@@ -62,7 +64,6 @@
             <outputDirectory>lib</outputDirectory>
             <includes>
                 <include>*.jar</include>
-                <include>lib/*.jar</include>
             </includes>
         </fileSet>
         <!-- 将项目说明文档打包到docs目录中 -->
