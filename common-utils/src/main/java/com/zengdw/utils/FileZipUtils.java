@@ -87,7 +87,7 @@ public class FileZipUtils {
                 }
                 OutputStream out = new FileOutputStream(file);
                 BufferedOutputStream bos = new BufferedOutputStream(out);
-                int len = -1;
+                int len;
                 byte[] buf = new byte[1024];
                 while ((len = zIn.read(buf)) != -1) {
                     bos.write(buf, 0, len);

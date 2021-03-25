@@ -43,7 +43,6 @@ public class FileUtils {
      * 利用文件通道(FileChannel)来实现文件(夹)复制
      *
      * @param s 要复制的文件(夹)
-     * @param t
      */
     private static void fileChannelCopy(File s, File t) {
         try (FileInputStream fi = new FileInputStream(s);
