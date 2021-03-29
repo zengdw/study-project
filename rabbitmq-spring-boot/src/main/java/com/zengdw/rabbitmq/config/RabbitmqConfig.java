@@ -23,7 +23,7 @@ public class RabbitmqConfig {
     public RabbitTemplate rabbitTemplate(RabbitTemplateConfigurer configurer, ConnectionFactory connectionFactory) {
         RabbitTemplate template = new RabbitTemplate();
         configurer.configure(template, connectionFactory);
-        // 消息为投递到queue时回调
+        // 消息未投递到queue时回调
         template.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
             System.out.println("消息发送失败");
             System.out.println("msg:" + new String(message.getBody(), StandardCharsets.UTF_8));
@@ -34,6 +34,7 @@ public class RabbitmqConfig {
             System.out.println("routingKey:" + routingKey);
         });
         // 消息未投递到exchange时回调
+        // 当使用rabbitmq_delayed_message_exchange插件时 这个回调不管成功与否都会回调
         template.setConfirmCallback((var1, var2, var3) -> {
             System.out.println(var1 != null ? var1.toString() : "");
             System.out.println(var2);
