@@ -23,28 +23,17 @@ public class DownLoadUtils {
     /**
      * 下载文件
      *
-     * @param filePath 文件路劲
-     * @param fileName 文件名
+     * @param file 文件
      */
-    public static void downLoadFile(String filePath, String fileName, HttpServletResponse response) throws Exception {
-        if (StringUtils.isEmpty(filePath)) {
-            throw new Exception("文件路劲不能为空");
-        }
-        final File file = new File(filePath);
+    public static void downLoadFile(File file, HttpServletResponse response) throws Exception {
         if (!file.exists()) {
             throw new Exception("文件不存在");
         }
         // 配置文件下载
         response.setContentType("application/octet-stream");
         response.setContentLength((int) file.length());
-        if (StringUtils.isBlank(fileName)) {
-            fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        }
-        String suffix = "";
-        if (!fileName.contains(".")) {
-            suffix = filePath.substring(filePath.lastIndexOf("."));
-        }
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName + suffix, StandardCharsets.UTF_8));
+        String fileName = file.getName();
+        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8));
         try (FileInputStream fileInputStream = new FileInputStream(file);
              BufferedInputStream inputStream = new BufferedInputStream(fileInputStream);
              ServletOutputStream outputStream = response.getOutputStream();
