@@ -1,0 +1,16 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: quartz-demo
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  quartz:
+    overwrite-existing-jobs: true
+    wait-for-jobs-to-complete-on-shutdown: true
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never

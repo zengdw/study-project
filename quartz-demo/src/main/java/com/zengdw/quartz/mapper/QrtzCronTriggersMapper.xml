@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zengdw.quartz.mapper.QrtzCronTriggersMapper">
+  <resultMap id="BaseResultMap" type="com.zengdw.quartz.domian.QrtzCronTriggers">
+    <!--@mbg.generated-->
+    <!--@Table qrtz_cron_triggers-->
+    <result column="SCHED_NAME" jdbcType="VARCHAR" property="schedName" />
+    <result column="TRIGGER_NAME" jdbcType="VARCHAR" property="triggerName" />
+    <result column="TRIGGER_GROUP" jdbcType="VARCHAR" property="triggerGroup" />
+    <result column="CRON_EXPRESSION" jdbcType="VARCHAR" property="cronExpression" />
+    <result column="TIME_ZONE_ID" jdbcType="VARCHAR" property="timeZoneId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    SCHED_NAME, `TRIGGER_NAME`, TRIGGER_GROUP, CRON_EXPRESSION, TIME_ZONE_ID
+  </sql>
+</mapper>
