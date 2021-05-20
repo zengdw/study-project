@@ -11,10 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MyClassLoader extends ClassLoader {
     private final String classPath;
-    private final static Map<String, Class<?>> classMap;
+    private final static Map<String, Class<?>> CLASS_MAP;
 
     static {
-        classMap = new ConcurrentHashMap<>();
+        CLASS_MAP = new ConcurrentHashMap<>();
     }
 
     public MyClassLoader(String classPath) {
@@ -29,7 +29,7 @@ public class MyClassLoader extends ClassLoader {
             return null;
         }
         final Class<?> aClass = defineClass(null, bytes, 0, bytes.length);
-        classMap.put(name, aClass);
+        CLASS_MAP.put(name, aClass);
         return aClass;
     }
 
@@ -37,7 +37,7 @@ public class MyClassLoader extends ClassLoader {
         if(!checkName(name)){
             return null;
         }
-        return classMap.get(name) != null ? classMap.get(name) : Thread.currentThread().getContextClassLoader().loadClass(name);
+        return CLASS_MAP.get(name) != null ? CLASS_MAP.get(name) : Thread.currentThread().getContextClassLoader().loadClass(name);
     }
 
     private byte[] loadClassData(String className) {
