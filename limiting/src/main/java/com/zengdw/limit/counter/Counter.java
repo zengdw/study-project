@@ -21,6 +21,7 @@ public class Counter {
             property = new CounterProperty(max, unitTime);
             PROPERTY_MAP.put(url, property);
             property.setStartTime(now);
+            property.inc();
             return true;
         } else {
             System.out.println(property.getQ());
