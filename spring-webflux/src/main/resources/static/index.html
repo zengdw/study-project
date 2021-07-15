@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    if (typeof (EventSource) !== "undefined") {
+        const source = new EventSource("/countDown");
+        source.addEventListener("countDown", function(e) {
+            document.getElementById("result").append(e.data)
+            const showContent = document.getElementById("result");
+            showContent.scrollTop = showContent.scrollHeight;
+        }, false);//使用false表示在冒泡阶段处理事件，而不是捕获阶段。
+    } else {
+        document.getElementById("result").innerHTML = "抱歉，你的浏览器不支持 server-sent 事件...";
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/index');
+    xhr.send(null);//发送请求
+    xhr.onreadystatechange = function() {
+        //2是空响应，3是响应一部分，4是响应完成
+        if (xhr.readyState > 2) {
+            console.log(xhr.response)
+            //这儿可以使用response与responseText，因为我接口返回的就是String数据，所以选择responseText
+            document.getElementById('logs').innerText = xhr.responseText
+            const showContent = document.getElementById("logs");
+            showContent.scrollTop = showContent.scrollHeight;
+        }
+    }
+
+</script>
+<div id="result" style="overflow-x: auto;overflow-y: auto;width: auto;height: 600px;"></div><br/>
+<div id="logs" style="overflow-x: auto;overflow-y: auto;width: auto;height: 600px;"></div>
+</body>
+</html>
