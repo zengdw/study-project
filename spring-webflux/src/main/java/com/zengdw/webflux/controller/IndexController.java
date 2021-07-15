@@ -25,7 +25,6 @@ import java.util.Map;
 @RestController
 public class IndexController {
     private final Logger logger = LoggerFactory.getLogger(IndexController.class);
-    private final int count_down_sec=3*60*60;
 
     @GetMapping("/log")
     public void log() {
