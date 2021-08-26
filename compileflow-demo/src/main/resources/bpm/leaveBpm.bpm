@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpm code="bpm.leaveBpm" name="test" type="process" description="This is test demo.">
+  <autoTask id="1628583180263" name="auto" g="305,135,90,50"></autoTask>
+  <start id="1" name="开始" g="115,16,30,30"></start>
+  <end id="11" name="结束" g="115,411,30,30"></end>
+</bpm>

@@ -18,13 +18,13 @@ public class TransmittableThreadLocalDemo {
         ThreadLocal<Integer> local = new TransmittableThreadLocal<>();
         executor= TtlExecutors.getTtlExecutor(executor);
         local.set(1);
-        executor.execute(()->{
-            System.out.println("in "+local.get());
+        executor.execute(() -> {
+            System.out.println("in " + local.get());
         });
         Thread.sleep(5000);
         local.set(12);
-        executor.execute(()->{
-            System.out.println("in2 "+local.get());
+        executor.execute(() -> {
+            System.out.println("in2 " + local.get());
         });
     }
 }
